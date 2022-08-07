@@ -1,0 +1,70 @@
+      body {
+        background-color: #e6d8e7;
+        background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239800a1' fill-opacity='0.22'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        text-align: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      header {
+        font-size: 300%;
+        font-weight: bold;
+      }
+
+      form {
+        display: flex;
+        margin: 20px auto;
+        justify-content: center;
+        
+      }
+
+      .input {
+        width: 60%;
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      .input:focus {
+        border: none;
+        outline: 2px solid olivedrab;
+      }
+
+      .search {
+        border: none;
+        width: 60px;
+        padding: 0;
+        background-color: #e6d8e700;
+        cursor: pointer;
+      }
+
+      .lds-dual-ring {
+        display: inline-block;
+        margin-top: 80px;
+        width: 80px;
+        height: 80px;
+      }
+
+      .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid #05b61d;
+        border-color: #05b61d transparent #05b61d transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+      }
+
+      .none {
+        display: none;
+      }
+      
+      @keyframes lds-dual-ring {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      

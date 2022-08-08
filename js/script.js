@@ -5,14 +5,23 @@ const spinner = document.querySelector('#spinner');
 
 const assignImgUrl = (el, url) => {
   el.src = url
-}
+};
 
-const setVal = () => {
-  const type = inp.value
-  localStorage.setItem('val', type)
-}
+const setGifToSearch = () => {
+  const gifToSearch = inp.value
+  localStorage.setItem('val', gifToSearch)
+};
 
-const fetchCatGif = () => {
+const addElToClass = (el, className) => {
+  el.classList.add(className)
+};
+
+const fetchRequestTimeout = setTimeout(() => {
+  assignImgUrl(img, './img/256x256.png')
+  alert('Oops! we ran into a problem, Try Again!')
+}, 7000);
+
+const fetchGif = () => {
   fetch(
     `https://api.giphy.com/v1/gifs/translate?api_key=VtmQZFpxMbOczLM5Vw5zU8sqZ13H0VX7&s=${
       localStorage.getItem('val') ? localStorage.getItem('val') : 'cat'
@@ -23,19 +32,22 @@ const fetchCatGif = () => {
       return response.json()
     })
     .then(response => {
-      const catUrl = response.data.images.original.url
-      assignImgUrl(img, catUrl)
-      spinner.classList.add('none');
-      clearTimeout(myTimeout)
+      const girUrl = response.data.images.original.url
+      assignImgUrl(img, girUrl)
+      clearTimeout(fetchRequestTimeout)
+      addElToClass(spinner, 'none')
     })
     .catch(e => {
-      alert(e)
-      assignImgUrl(img, './img/256x256.png')
+      assignImgUrl(img, './img/256x256.png');
+      clearTimeout(fetchRequestTimeout);
+      addElToClass(spinner, 'none');
+      alert(e);
     })
-}
+};
 
-fetchCatGif()
-const myTimeout = setTimeout(() => {
-  alert('Poor Internet Connection, Try Again!')
-}, 7000)
-search.addEventListener('submit', setVal)
+const startApp = () => {
+  fetchGif()
+  search.addEventListener('submit', setGifToSearch)
+};
+
+startApp();

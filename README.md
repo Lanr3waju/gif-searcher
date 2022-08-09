@@ -2,7 +2,7 @@
 
 > This is a task on API's, 
 
-![screenshot](./src/img/awesome-books.png)
+![screenshot](./img/preview.png)
 
 This is an app that accepts keyword input and searches for the gif that matches that keyword on giphy's API. 
 
@@ -33,7 +33,7 @@ This is an app that accepts keyword input and searches for the gif that matches 
 
 ## Live Demo
 
-[Live Demo Link](https://e-bookstore-pwa.netlify.app/)
+[Live Demo Link](https://lanres-giphy.netlify.app/)
 
 ### Development (Running locally)
 

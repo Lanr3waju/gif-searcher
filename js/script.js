@@ -4,57 +4,43 @@ const spinner = document.querySelector('#spinner')
 const errorPrompt = document.querySelector('#error-prompt')
 const closeError = document.querySelector('#close')
 
-const assignImgUrl = (el, url) => {
-  el.src = url
-}
-
-const addElClass = (el, className) => {
-  el.classList.add(className)
-}
-
-const removeElClass = (el, className) => {
-  el.classList.remove(className)
-}
-
 const closeErrorPrompt = () => {
-  addElClass(errorPrompt, 'none');
-  removeElClass(img, 'none');
+  errorPrompt.classList.add('none')
+  img.classList.remove('none')
 }
 
-const fetchGif = event => {
+const fetchGif = async event => {
   event.preventDefault()
   const inp = document.querySelector('#text-inp')
-  addElClass(img, 'none')
-  removeElClass(spinner, 'none')
+  img.classList.add('none')
+  spinner.classList.remove('none')
   const gifToSearch = inp.value
-  localStorage.setItem('val', gifToSearch)
-  
-  fetch(
-    `https://api.giphy.com/v1/gifs/translate?api_key=qrMWKOWofYZsz4eOSCm92mboLFxOO8d4&s=${
-      localStorage.getItem('val') ? localStorage.getItem('val') : 'cat'
-    }`,
-    { mode: 'cors' }
-  )
-    .then(response => {
-      return response.json()
-    })
-    .then(response => {
-      const {data: {images: {fixed_height_small: {url}}}} = response;
-      const girUrl = url
-      assignImgUrl(img, girUrl)
-      removeElClass(img, 'none')
-      addElClass(spinner, 'none')
-    })
-    .catch(e => {
-      assignImgUrl(img, './img/128x128.png')
-      addElClass(spinner, 'none')
-      removeElClass(errorPrompt, 'none')
-    })
+
+  try {
+    const response = await fetch(
+      `https://api.giphy.com/v1/gifs/translate?api_key=qrMWKOWofYZsz4eOSCm92mboLFxOO8d4&s=${gifToSearch}`,
+      { mode: 'cors' }
+    )
+    const {data: {
+      images: {
+        fixed_height_small: { url }
+      }
+    }
+  } = await response.json()
+
+    img.src = url;
+    img.classList.remove('none')
+    spinner.classList.add('none')
+  } catch (e) {
+    img.src = './img/128x128.png'
+    spinner.classList.add('none')
+    errorPrompt.classList.remove('none')
+  }
 }
 
 const startApp = () => {
-  assignImgUrl(img, './img/128x128.png')
-  addElClass(spinner, 'none')
+  img.src = './img/128x128.png'
+  spinner.classList.add('none')
   search.addEventListener('submit', fetchGif)
   closeError.addEventListener('click', closeErrorPrompt)
 }
